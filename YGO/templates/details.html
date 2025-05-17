@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Details Page</h1>
+    <h1>Card Details: {{ card.name }}</h1>
+
+    <p><strong>ID:</strong> {{ card.id }}</p>
+    <p><strong>Type:</strong> {{ card.card_type }}</p>
+    <p><strong>Attribute:</strong> {{ card.attribute }}</p>
+    <p><strong>Level:</strong> {{ card.level }}</p>
+    <p><strong>Attack:</strong> {{ card.attack }}</p>
+    <p><strong>Defense:</strong> {{ card.defense }}</p>
+    <p><strong>Rarity:</strong> {{ card.rarity }}</p>
+    <p><strong>Text:</strong></p>
+    <p>{{ card.text|linebreaksbr }}</p>
+
+    <p>
+        <a href="{% url 'card_update' pk=card.pk %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'card_delete' pk=card.pk %}" class="btn btn-danger">Delete</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back to List</a>
+    </p>
+
 {% endblock content %}
