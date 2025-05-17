@@ -1,0 +1,1 @@
+python .\YGO\manage.py runserver
