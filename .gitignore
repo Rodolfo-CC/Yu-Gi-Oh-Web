@@ -159,3 +159,9 @@ $RECYCLE.BIN/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+
+# Custom
+[Tt]rash/
+[Pp]rivate/
+[Tt]mp/
+[Tt]emp/
