@@ -8,7 +8,7 @@ class CardForm(forms.ModelForm):
     class Meta:
         model = Card
         fields: list[str] = [
-            'id', 'name', 'text', 'level', 'attack', 'defense', 'card_type', 'attribute', 'rarity',
+            'id', 'name', 'text', 'level', 'attack', 'defense', 'card_type', 'attribute', 'rarity', 'image',
         ]
         widgets: dict[str, forms.Widget] = {
             'text': forms.Textarea(attrs={'rows': 4})
