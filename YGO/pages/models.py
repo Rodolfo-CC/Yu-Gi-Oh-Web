@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.urls import reverse
+from django.db.models.fields.files import FieldFile
 
 class Card(models.Model):
     """
@@ -48,6 +50,11 @@ class Card(models.Model):
         choices=CardRarity.choices,
         db_index=True
     )
+    image: models.ImageField = models.ImageField(
+        upload_to="cards/",
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         """Human-readable string representation of the Card object."""
@@ -56,6 +63,9 @@ class Card(models.Model):
     def __repr__(self):
         """Developer-friendly representation of the Card object."""
         return f"<Card id={self.id} name={self.name} type={self.card_type}>"
+
+    def get_absolute_url(self) -> str:
+        return reverse("card_detail", kwargs={"pk": self.pk})
 
     class Meta:
         """Meta options for the Card model."""
