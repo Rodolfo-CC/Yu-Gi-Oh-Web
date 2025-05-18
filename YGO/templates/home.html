@@ -1,5 +1,52 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Home Page</h1>
+    <h1>Yu-Gi-Oh! Card List</h1>
+    <p><a href="{% url 'card_create' %}" class="btn btn-primary">Add New Card</a></p>
+    {% if card_list %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Image</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Attribute</th>
+                    <th scope="col">Level</th>
+                    <th scope="col">ATK</th>
+                    <th scope="col">DEF</th>
+                    <th scope="col">Rarity</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for card in card_list %}
+                    <tr>
+                        <td>
+                            {% if card.image %}
+                                <img src="{{ card.image.url }}" alt="{{ card.name }} card image" style="max-width: 50px; max-height: auto;">
+                            {% else %}
+                                <img src="static/default.png" alt="No image available" style="max-width: 50px; max-height: auto;">
+                            {% endif %}
+                        </td>
+                        <td>{{ card.id }}</td>
+                        <td>{{ card.name }}</td>
+                        <td>{{ card.card_type }}</td>
+                        <td>{{ card.attribute }}</td>
+                        <td>{{ card.level }}</td>
+                        <td>{{ card.attack }}</td>
+                        <td>{{ card.defense }}</td>
+                        <td>{{ card.rarity }}</td>
+                        <td>
+                            <a href="{% url 'card_detail' pk=card.pk %}" class="btn btn-sm btn-info">View</a>
+                            <a href="{% url 'card_update' pk=card.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{% url 'card_delete' pk=card.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No cards found in the database. Why don't you <a href="{% url 'card_create' %}">add one</a>?</p>
+    {% endif %}
 {% endblock content %}
