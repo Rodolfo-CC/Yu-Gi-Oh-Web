@@ -1,11 +1,13 @@
 {% extends 'base.html' %}
 
+{% block breadcrumb_page_title %}Delete Card{% endblock %}
+
 {% block content %}
     <h1>Delete Card</h1>
     <p>Are you sure you want to delete the card: "<strong>{{ card.name }}</strong>"?</p>
-    <form method="post">
+    <form method="post" class="mt-3">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Confirm Delete</button>
-        <a href="{% url 'card_detail' pk=card.pk %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt fa-fw me-1"></i>Confirm Delete</button>
+        <a href="{% url 'card_detail' pk=card.pk %}" class="btn btn-secondary"><i class="fas fa-times fa-fw me-1"></i>Cancel</a>
     </form>
 {% endblock content %}

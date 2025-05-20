@@ -1,34 +1,38 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
+{% block breadcrumb_page_title %}
+    {% if card %}Edit Card{% else %}Add Card{% endif %}
+{% endblock %}
+
 {% block content %}
     {% if card %}
         <h1>Edit Card: {{ card.name }}</h1>
     {% else %}
         <h1>Add New Card</h1>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" class="mt-3">
         {% csrf_token %}
         {% for field in form %}
             <div class="mb-3">
                 {{ field.label_tag }}
                 {{ field|add_class:"form-control" }}
                 {% if field.help_text %}
-                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                    <small class="form-text text-muted-custom">{{ field.help_text|safe }}</small>
                 {% endif %}
                 {% for error in field.errors %}
-                    <small class="form-text text-danger">{{ error }}</small>
+                    <small class="form-text text-danger-custom">{{ error }}</small>
                 {% endfor %}
             </div>
         {% endfor %}
         {% if form.non_field_errors %}
-            <div class="alert alert-danger">
+            <div class="alert alert-danger-custom">
                 {% for error in form.non_field_errors %}
                     {{ error }}
                 {% endfor %}
             </div>
         {% endif %}
-        <button type="submit" class="btn btn-success">Save Card</button>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-success"><i class="fas fa-save fa-fw me-1"></i>Save Card</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary"><i class="fas fa-times fa-fw me-1"></i>Cancel</a>
     </form>
 {% endblock content %}
